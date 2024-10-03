@@ -1,0 +1,22 @@
+# Start with a Miniconda base image
+FROM continuumio/miniconda3
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the Conda environment directory from the local machine to the Docker image
+# Replace /path/to/local/conda/env with your actual environment directory path
+COPY /mnt/workspace/miniconda3/envs/videosalmonn /opt/conda/envs/videosalmonn
+
+# Ensure the environment is activated when the container starts
+RUN echo "source activate videosalmonn" > ~/.bashrc
+
+# Set the path to include the Conda environment's binaries
+ENV PATH /opt/conda/envs/videosalmonn/bin:$PATH
+
+# Optionally, copy application code (e.g., Python scripts) to the Docker image
+COPY SALMONN ./
+
+# Set the default command to run inside the environment
+CMD ["python", "inference.py", "--cfg-path", "config/test.yaml"]  # Adjust to your actual script
+
