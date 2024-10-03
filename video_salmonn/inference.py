@@ -31,6 +31,7 @@ def parse_args():
 
 # Set device
 device = "cuda" if torch.cuda.is_available() else "cpu"
+print("*"*60, "device:", device)
 
 # Load arguments
 args = parse_args()
