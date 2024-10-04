@@ -36,6 +36,7 @@ print("*"*60, "device:", device)
 # Load arguments
 args = parse_args()
 args = Config(args).config
+print(args)
 
 # Load the list of test files
 all_decode_info = args.all_decode_info
